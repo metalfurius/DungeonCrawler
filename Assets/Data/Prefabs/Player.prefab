@@ -978,6 +978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8420913045510063664}
   - component: {fileID: 2375798280462273778}
+  - component: {fileID: 7526257541066321075}
   m_Layer: 0
   m_Name: Md_Char_Low_Poly_Man
   m_TagString: Untagged
@@ -1099,6 +1100,29 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.02152279, y: -0.009413511, z: 0}
     m_Extent: {x: 0.9414129, y: 0.2786869, z: 1.0245608}
   m_DirtyAABB: 0
+--- !u!136 &7526257541066321075
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799891038944211635}
+  m_Material: {fileID: 13400000, guid: 936df42acae31624d86f91dde83f1e59, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.21
+  m_Height: 1.9449695
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8535884, z: -0.0060920813}
 --- !u!1 &4964433684553259032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,7 +2055,7 @@ GameObject:
   - component: {fileID: -8803839522176417012}
   - component: {fileID: 8200709484439343453}
   - component: {fileID: 3807264115586555547}
-  - component: {fileID: -8237127894435300871}
+  - component: {fileID: 8043910157630891656}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2054,7 +2078,7 @@ Transform:
   - {fileID: 8420913045510063664}
   - {fileID: 1440546779668604199}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3540708580752116890
 MonoBehaviour:
@@ -2087,7 +2111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92e96ae75fffb44ca7b8f77de9b7486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 0}
 --- !u!114 &8200709484439343453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2102,9 +2125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalMovement: 0
   horizontalMovement: 0
-  moveAmount: 0
-  walkingSpeed: 2
-  runningSpeed: 5
+  runningSpeed: 100
 --- !u!114 &3807264115586555547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2119,31 +2140,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
+  netWorkRotation:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
   networkPositionVelocity: {x: 0, y: 0, z: 0}
   networkPositionSmoothTime: 0.1
---- !u!143 &-8237127894435300871
-CharacterController:
+  networkRotationSmoothTime: 0.1
+--- !u!54 &8043910157630891656
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9099322951226773159}
-  m_Material: {fileID: 0}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1.8
-  m_Radius: 0.23
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 1

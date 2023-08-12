@@ -5,11 +5,9 @@ using Unity.Netcode;
 
 public class CharacterManager : NetworkBehaviour
 {
-    public CharacterController characterController;
     CharacterNetworkManager characterNetworkManager;
     protected virtual void Awake() {
         DontDestroyOnLoad(this);
-        characterController=GetComponent<CharacterController>();
         characterNetworkManager=GetComponent<CharacterNetworkManager>();
     }
     protected virtual void Update(){
@@ -28,5 +26,8 @@ public class CharacterManager : NetworkBehaviour
             characterNetworkManager.netWorkRotation.Value,
             characterNetworkManager.networkRotationSmoothTime);
         }
+    }
+    protected virtual void LateUpdate() {
+        
     }
 }
