@@ -29,11 +29,13 @@ public class PlayerCamera : MonoBehaviour
             HandleFollowTarget();
             HandleRotations();
         }
-        //Follow player
-        //rotate around player
-        //collide with objects
     }
     private void HandleFollowTarget(){
+        if(PlayerInputManager.instance.crouchInput){
+            playersHeight=0.825f;
+        }else{
+            playersHeight=1.65f;
+        }
         transform.position=player.transform.position+new Vector3(0,playersHeight,0);
     }
     private void HandleRotations(){

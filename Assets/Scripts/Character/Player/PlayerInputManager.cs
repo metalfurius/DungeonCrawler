@@ -8,9 +8,13 @@ public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager instance;
     PlayerControls playerControls;
+    KeyCode jumpKey=KeyCode.Space;
+    KeyCode crouchKey=KeyCode.LeftControl;
     [Header("Player Movement Input")]
     [SerializeField] Vector2 movementInput;
     public float verticalInput, horizontalInput, moveAmount;
+    public bool jumpInput;
+    public bool crouchInput;
     [Header("Camera Movement Input")]
     [SerializeField] Vector2 cameraInput;
     public float cameraVerticalInput, cameraHorizontalInput;
@@ -78,6 +82,8 @@ public class PlayerInputManager : MonoBehaviour
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
+        jumpInput=Input.GetKey(jumpKey);
+        crouchInput=Input.GetKey(crouchKey);
         moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
         if (moveAmount <= 0.5 && moveAmount > 0)
         {

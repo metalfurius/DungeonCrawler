@@ -14,17 +14,22 @@ public class CharacterManager : NetworkBehaviour
         if(IsOwner){
             characterNetworkManager.networkPosition.Value=transform.position;
             characterNetworkManager.netWorkRotation.Value=transform.rotation;
+            characterNetworkManager.networkScale.Value=transform.localScale;
         }
         else
         {
-            transform.position=Vector3.SmoothDamp(transform.position,
+            transform.position=characterNetworkManager.networkPosition.Value;
+            transform.rotation=characterNetworkManager.netWorkRotation.Value;
+            transform.localScale=characterNetworkManager.networkScale.Value;
+
+            /*transform.position=Vector3.SmoothDamp(transform.position,
             characterNetworkManager.networkPosition.Value,
             ref characterNetworkManager.networkPositionVelocity,
             characterNetworkManager.networkPositionSmoothTime);
 
             transform.rotation=Quaternion.Slerp(transform.rotation,
             characterNetworkManager.netWorkRotation.Value,
-            characterNetworkManager.networkRotationSmoothTime);
+            characterNetworkManager.networkRotationSmoothTime);*/
         }
     }
     protected virtual void LateUpdate() {

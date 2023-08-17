@@ -2123,9 +2123,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aeb3e201ff655e40a4a4c251c2af24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 314
+  groundDrag: 5.275
+  airDrag: 1.047
+  jumpForce: 15.7
+  jumpCooldown: 0.314
+  airMultiplier: 0.314
+  playerHeight: 1.047
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  crouchSpeed: 157
+  crouchYScale: 0.5
+  maxSlopeAngle: 40
   verticalMovement: 0
   horizontalMovement: 0
-  runningSpeed: 100
+  pressingCrouch: 0
+  pressingJump: 0
 --- !u!114 &3807264115586555547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2142,9 +2156,8 @@ MonoBehaviour:
     m_InternalValue: {x: 0, y: 0, z: 0}
   netWorkRotation:
     m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
-  networkPositionVelocity: {x: 0, y: 0, z: 0}
-  networkPositionSmoothTime: 0.1
-  networkRotationSmoothTime: 0.1
+  networkScale:
+    m_InternalValue: {x: 0, y: 1.65, z: 0}
 --- !u!54 &8043910157630891656
 Rigidbody:
   m_ObjectHideFlags: 0
