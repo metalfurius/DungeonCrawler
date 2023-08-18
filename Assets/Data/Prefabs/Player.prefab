@@ -2136,8 +2136,15 @@ MonoBehaviour:
   crouchSpeed: 157
   crouchYScale: 0.5
   maxSlopeAngle: 40
+  dashFov: 130
+  normalFov: 85
+  dashForce: 20
+  dashUpwardForce: 0
+  dashDuration: 0.25
+  dashCd: 1
   verticalMovement: 0
   horizontalMovement: 0
+  pressingDash: 0
   pressingCrouch: 0
   pressingJump: 0
 --- !u!114 &3807264115586555547

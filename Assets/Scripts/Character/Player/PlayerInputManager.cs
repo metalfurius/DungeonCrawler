@@ -8,16 +8,23 @@ public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager instance;
     PlayerControls playerControls;
-    KeyCode jumpKey=KeyCode.Space;
-    KeyCode crouchKey=KeyCode.LeftControl;
+
+    [Header("Keys")]
+    KeyCode dashKey = KeyCode.LeftShift;
+    KeyCode jumpKey = KeyCode.Space;
+    KeyCode crouchKey = KeyCode.LeftControl;
+
     [Header("Player Movement Input")]
     [SerializeField] Vector2 movementInput;
     public float verticalInput, horizontalInput, moveAmount;
     public bool jumpInput;
     public bool crouchInput;
+    public bool dashInput;
+
     [Header("Camera Movement Input")]
     [SerializeField] Vector2 cameraInput;
     public float cameraVerticalInput, cameraHorizontalInput;
+
     private void Awake()
     {
         if (instance == null)
@@ -41,8 +48,8 @@ public class PlayerInputManager : MonoBehaviour
         if (newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
             instance.enabled = true;
-            Cursor.lockState=CursorLockMode.Locked;
-            Cursor.visible=false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else
         {
@@ -64,17 +71,22 @@ public class PlayerInputManager : MonoBehaviour
     {
         SceneManager.activeSceneChanged -= OnSceneChange;
     }
-    private void OnApplicationFocus(bool focusStatus) {
-        if(enabled){
-            if(focusStatus){
+    private void OnApplicationFocus(bool focusStatus)
+    {
+        if (enabled)
+        {
+            if (focusStatus)
+            {
                 playerControls.Enable();
             }
-            else{
+            else
+            {
                 playerControls.Disable();
             }
         }
     }
-    private void Update() {
+    private void Update()
+    {
         HandleMovementInput();
         HandleCameraMovementInput();
     }
@@ -82,8 +94,11 @@ public class PlayerInputManager : MonoBehaviour
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
-        jumpInput=Input.GetKey(jumpKey);
-        crouchInput=Input.GetKey(crouchKey);
+
+        jumpInput = Input.GetKey(jumpKey);
+        crouchInput = Input.GetKey(crouchKey);
+        dashInput = Input.GetKey(dashKey);
+
         moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
         if (moveAmount <= 0.5 && moveAmount > 0)
         {
@@ -94,9 +109,10 @@ public class PlayerInputManager : MonoBehaviour
             moveAmount = 1;
         }
     }
-    private void HandleCameraMovementInput(){
+    private void HandleCameraMovementInput()
+    {
         cameraVerticalInput = cameraInput.y;
         cameraHorizontalInput = cameraInput.x;
-        
+
     }
 }

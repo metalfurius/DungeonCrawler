@@ -23,9 +23,20 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
 
+    [Header("Dashing")]
+    public float dashFov=95f;
+    public float normalFov=85f;
+    public float dashForce;
+    public float dashUpwardForce;
+    public float dashDuration;
+    public float dashCd;
+    float dashCdTimer;
+    bool isDashing;
+
     [Header("Inputs")]
     public float verticalMovement;
     public float horizontalMovement;
+    [SerializeField] bool pressingDash;
     [SerializeField] bool pressingCrouch;
     [SerializeField] bool pressingJump;
     private Vector3 moveDirection;
@@ -38,6 +49,13 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         rb.freezeRotation = true;
         startYscale = transform.localScale.y;
     }
+    private void Update()
+    {
+        if (dashCdTimer > 0)
+        {
+            dashCdTimer -= Time.deltaTime;
+        }
+    }
 
     public void HandleAllMovement()
     {
@@ -47,6 +65,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         HandleSpeedLimit();
         HandeJump();
         HandleCrouch();
+        HandleDash();
     }
 
     private void HandleCrouch()
@@ -62,6 +81,29 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             //Crouchn't
             transform.localScale = new Vector3(transform.localScale.x, startYscale, transform.localScale.z);
         }
+    }
+    private void HandleDash()
+    {
+        pressingDash = PlayerInputManager.instance.dashInput;
+        if (pressingDash&&!isDashing&&moveDirection!=Vector3.zero)
+        {
+            PlayerCamera.instance.DoFov(dashFov);
+            dashCdTimer=dashCd;
+            isDashing = true;
+            Dash();
+            CancelInvoke(nameof(ResetDash));
+            Invoke(nameof(ResetDash), dashDuration);
+        }
+    }
+    private void Dash()
+    {
+        Vector3 forceToApply = moveDirection * dashForce;
+        rb.AddForce(forceToApply, ForceMode.Impulse);
+        PlayerCamera.instance.DoFov(normalFov);
+    }
+    private void ResetDash()
+    {
+        isDashing = false;
     }
     private void HandeJump()
     {
@@ -86,6 +128,9 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleSpeedLimit()
     {
+        if (isDashing)
+        {
+        }
         if (OnSlope())
         {
             if (rb.velocity.magnitude > moveSpeed)

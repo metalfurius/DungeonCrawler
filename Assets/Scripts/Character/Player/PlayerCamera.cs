@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -30,6 +30,12 @@ public class PlayerCamera : MonoBehaviour
             HandleRotations();
         }
     }
+
+    public void DoFov(float endValue)
+    {
+        cameraObject.GetComponent<Camera>().DOFieldOfView(endValue,0.125f);
+    }
+
     private void HandleFollowTarget(){
         if(PlayerInputManager.instance.crouchInput){
             playersHeight=0.825f;
